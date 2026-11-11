@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA Negeri Nusantara</title>
+    <style>
+        :root {
+            --primary: #174a7e;
+            --primary-dark: #10365d;
+            --accent: #f2b84b;
+            --ink: #203044;
+            --muted: #64748b;
+            --surface: #ffffff;
+            --soft: #f3f7fb;
+            --line: #dce5ee;
+            --radius: 16px;
+            --shadow: 0 12px 30px rgba(25, 55, 85, .09);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--ink);
+            background: #f7f9fc;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        .topbar {
+            background: var(--primary-dark);
+            color: #eaf3fb;
+            font-size: .85rem;
+            padding: 8px 0;
+        }
+
+        .topbar .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        header {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 3px 15px #122d4510;
+        }
+
+        .nav-wrap {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--primary);
+            color: white;
+            font-size: .8rem;
+            border: 3px solid #d8e6f3;
+        }
+
+        .brand small {
+            display: block;
+            color: var(--muted);
+            font-size: .7rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            font-size: .9rem;
+            font-weight: 700;
+            color: #40536a;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            cursor: pointer;
+            border-radius: 9px;
+            padding: 11px 17px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .btn-primary {
+            color: white;
+            background: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--primary);
+        }
+
+        .menu-btn {
+            display: none;
+            background: transparent;
+            border: 0;
+            font-size: 1.7rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 34px 0 22px;
+        }
+
+        .hero-card {
+            min-height: 360px;
+            border-radius: 22px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: clamp(28px, 6vw, 70px);
+            background: linear-gradient(90deg, rgba(8, 35, 64, .94), rgba(8, 35, 64, .55)),
+                url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=85") center/cover;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: .78rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.12;
+            margin: 12px 0 18px;
+        }
+
+        .hero p {
+            color: #e6eef7;
+            max-width: 530px;
+            margin-bottom: 24px;
+        }
+
+        .hero-dots {
+            display: flex;
+            gap: 7px;
+            margin-top: 24px;
+        }
+
+        .hero-dots span {
+            width: 8px;
+            height: 8px;
+            background: #ffffff80;
+            border-radius: 50%;
+        }
+
+        .hero-dots span:first-child {
+            width: 24px;
+            border-radius: 8px;
+            background: var(--accent);
+        }
+
+        section {
+            padding: 58px 0;
+            scroll-margin-top: 88px;
+        }
+
+        .section-heading {
+            margin-bottom: 25px;
+        }
+
+        .section-heading .eyebrow {
+            color: var(--primary);
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            font-size: clamp(1.55rem, 3vw, 2.2rem);
+            line-height: 1.2;
+            margin-top: 7px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.5fr;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .principal {
+            min-height: 230px;
+            border-radius: var(--radius);
+            background: linear-gradient(145deg, #dceaf6, #b8d0e5);
+            display: grid;
+            place-items: center;
+            color: var(--primary);
+            font-size: 5rem;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .card-image {
+            height: 160px;
+            background: linear-gradient(135deg, #d7e5f1, #8eafca);
+            display: grid;
+            place-items: center;
+            color: var(--primary);
+            font-size: 3rem;
+        }
+
+        .card-body {
+            padding: 19px;
+        }
+
+        .card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 7px;
+            font-size: 1.08rem;
+        }
+
+        .tag {
+            display: inline-block;
+            color: var(--primary);
+            background: #eaf2f9;
+            padding: 4px 9px;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .soft-section {
+            background: var(--soft);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid var(--line);
+            padding: 20px;
+            border-radius: 13px;
+        }
+
+        .feature-icon {
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+        }
+
+        .feature h3 {
+            color: var(--primary-dark);
+            font-size: 1rem;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: .9rem;
+            margin-top: 5px;
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .step {
+            text-align: center;
+            background: #edf4fa;
+            padding: 14px 8px;
+            border-radius: 10px;
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .step b {
+            display: block;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 27px;
+            height: 27px;
+            line-height: 27px;
+            margin: 0 auto 7px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 13px;
+        }
+
+        .field.full {
+            grid-column: 1/-1;
+        }
+
+        label {
+            font-size: .88rem;
+            font-weight: 700;
+            color: #40536a;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #ccd8e3;
+            border-radius: 8px;
+            padding: 11px 12px;
+            background: white;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px #174a7e18;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .portal-item {
+            background: #f1f6fb;
+            padding: 19px;
+            border-radius: 12px;
+        }
+
+        .portal-item strong {
+            display: block;
+            color: var(--primary-dark);
+        }
+
+        footer {
+            background: #102f4e;
+            color: #dbe8f3;
+            padding: 38px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 25px;
+        }
+
+        footer h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        footer p,
+        footer a {
+            color: #c1d2e1;
+            font-size: .9rem;
+        }
+
+        footer a {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .copyright {
+            border-top: 1px solid #ffffff25;
+            margin-top: 25px;
+            padding-top: 17px;
+            font-size: .82rem;
+            color: #a9bfd2;
+        }
+
+        .notice {
+            margin-top: 12px;
+            color: #17633a;
+            font-weight: 700;
+            font-size: .9rem;
+        }
+
+        @media (max-width: 850px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 18px 4%;
+                flex-direction: column;
+                align-items: flex-start;
+                border-top: 1px solid var(--line);
+            }
+
+            nav.open {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-wrap>.btn {
+                display: none;
+            }
+
+            .grid-3,
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .welcome-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topbar .container {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero-card {
+                min-height: 390px;
+            }
+
+            .grid-3,
+            .feature-grid,
+            .split,
+            .footer-grid,
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            section {
+                padding: 43px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="container"><span>📍 Jl. Pendidikan No. 10, Indonesia</span><span>✉ info@smanusantara.sch.id &nbsp; |
+                &nbsp; ☎ (021) 123-4567</span></div>
+    </div>
+
+    <header>
+        <div class="container nav-wrap">
+            <a class="brand" href="#beranda"><span class="logo">SMA<br>NK</span><span>SMA NEGERI NUSANTARA<small>UNGGUL
+                        • BERKARAKTER • BERPRESTASI</small></span></a>
+            <button class="menu-btn" id="menuBtn" aria-label="Buka menu">☰</button>
+            <nav id="navMenu">
+                <a href="#beranda">Beranda</a><a href="#profil">Profil</a><a href="#akademik">Akademik</a>
+                <a href="#kesiswaan">Kesiswaan</a><a href="#ppdb">PPDB</a><a href="#berita">Berita</a><a
+                    href="#kontak">Kontak</a>
+            </nav>
+            <a class="btn btn-primary" href="#portal">Login Portal</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="beranda">
+            <div class="container">
+                <div class="hero-card">
+                    <div class="hero-content">
+                        <div class="eyebrow">Selamat datang di website resmi</div>
+                        <h1>Membangun Generasi Cerdas dan Berkarakter</h1>
+                        <p>SMA Negeri Nusantara berkomitmen menghadirkan pendidikan berkualitas, lingkungan belajar yang
+                            nyaman, dan kesempatan berkembang bagi setiap siswa.</p>
+                        <a class="btn btn-light" href="#profil">Jelajahi Sekolah &nbsp; →</a>
+                        <div class="hero-dots"><span></span><span></span><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container welcome-grid">
+                <div class="principal">
+                    <img src="uu.jpg" width="400" height="250" alt="Kepala Sekolah">
+                </div>
+                <div class="panel">
+                    <div class="eyebrow">Sambutan kepala sekolah</div>
+                    <h2>Selamat Datang di SMA Negeri Nusantara</h2>
+                    <p class="muted" style="margin-top:12px">Puji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa.
+                        Website ini menjadi sarana informasi dan komunikasi sekolah dengan siswa, orang tua, alumni,
+                        serta masyarakat. Mari bersama membangun pendidikan yang unggul dan berkarakter.</p>
+                    <p style="margin-top:14px"><strong>Kepala Sekolah</strong><br><span class="muted">Dr.abdulrahman,
+                            M.Pd.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="soft-section" id="berita">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Informasi sekolah</div>
+                    <h2>Berita Terbaru</h2>
+                    <p>Informasi dan kabar terbaru dari lingkungan sekolah.</p>
+                </div>
+                <div class="grid-3">
+                    <article class="card">
+                        <div class="card-image">
+                           <img src="12.jpg" alt="" width="250" height="150">
+                        </div>
+
+                        <div class="card-body"><span class="tag">Prestasi</span>
+                            <h3>Siswa Raih Prestasi Tingkat Kabupaten</h3>
+                            <p class="muted">Selamat kepada siswa-siswi yang telah mengharumkan nama sekolah.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-image">
+                          <img src="34.jpg" alt="" width="250" height="150">
+                        </div>
+                        <div class="card-body"><span class="tag">Akademik</span>
+                            <h3>Kegiatan Literasi Sekolah</h3>
+                            <p class="muted">Meningkatkan budaya membaca dan kemampuan berpikir kritis.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-image">
+                            <img src="56.jpg" alt="" width="250" height="150">
+                        </div>
+                        <div class="card-body"><span class="tag">Kegiatan</span>
+                            <h3>Festival Seni dan Budaya</h3>
+                            <p class="muted">Wadah kreativitas dan pengembangan bakat peserta didik.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="profil">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Mengenal sekolah</div>
+                    <h2>Profil Sekolah</h2>
+                    <p>Visi, misi, dan susunan organisasi SMA Negeri Nusantara.</p>
+                </div>
+                <div class="split">
+                    <div class="panel">
+                        <h3>Visi</h3>
+                        <p class="muted" style="margin:8px 0 18px">Terwujudnya peserta didik yang beriman, berprestasi,
+                            berkarakter, mandiri, dan peduli lingkungan.</p>
+                        <h3>Misi</h3>
+                        <ol class="muted" style="padding-left:20px;margin-top:8px">
+                            <li>Menyelenggarakan pembelajaran yang aktif dan inovatif.</li>
+                            <li>Mengembangkan potensi akademik dan nonakademik siswa.</li>
+                            <li>Menanamkan kedisiplinan dan karakter positif.</li>
+                            <li>Menciptakan lingkungan sekolah yang aman dan nyaman.</li>
+                        </ol>
+                    </div>
+                    <div class="panel">
+                        <h3>Struktur Organisasi</h3>
+                        <div class="feature-grid" style="margin-top:15px">
+                            <div class="feature">
+                                <div class="card-image">
+                                    <img src="uu.jpg" alt="" width="160" height="150">
+                                </div>
+                                <h3>Kepala Sekolah</h3>
+                            </div>
+                            <div class="feature">
+                                <div class="card-image">
+                                  <img src="aa.jpg" alt="" width="160" height="150">
+                                </div>
+                                <h3>Wakasek</h3>
+                            </div>
+                            <div class="feature">
+                                <div class="card-image">
+                                  <img src="yy.jpg" alt="" width="160" height="150">
+                                </div>
+                                <h3>Guru</h3>
+                            </div>
+                            <div class="feature">
+                                <div class="card-image">
+                                  <img src="ll.jpg" alt="" width="160" height="150">
+                                </div>
+                                <h3>Siswa</h3>
+                            </div>
+                            <div class="feature">
+                                <div class="card-image">
+                                  <img src="pp.jpg" alt="" width="160" height="150">
+                                </div>
+                                <h3>Tata Usaha</h3>
+                            </div>
+                            <div class="feature">
+                                <div class="card-image">
+                                  <img src="tt.jpg" alt="" width="160" height="150">
+                                </div>
+                                <h3>Komite</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="soft-section" id="akademik">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Pendidikan</div>
+                    <h2>Akademik</h2>
+                    <p>Informasi kurikulum, tenaga pendidik, dan fasilitas pembelajaran.</p>
+                </div>
+                <div class="split">
+                    <div class="panel">
+                        <h3>Kurikulum</h3>
+                        <p class="muted" style="margin-top:8px">Pembelajaran dirancang untuk mengembangkan kompetensi,
+                            kreativitas, karakter, dan kemampuan berpikir kritis peserta didik.</p>
+                        <h3 style="margin-top:22px">Program Unggulan</h3>
+                        <ul class="muted" style="padding-left:20px;margin-top:8px">
+                            <li>Literasi dan numerasi</li>
+                            <li>Pembelajaran berbasis proyek</li>
+                            <li>Bimbingan prestasi akademik</li>
+                        </ul>
+                    </div>
+                    <div class="panel">
+                        <h3>Daftar Guru</h3>
+                        <div class="feature-grid" style="margin-top:15px">
+                            <div class="feature">
+                              <img src="01.jpg" alt="" width="160" height="150">
+                                <h3>Guru Bahasa</h3>
+                                <p>Tenaga pendidik</p>
+                            </div>
+                            <div class="feature">
+                                <img src="02.jpg" alt="" width="160" height="150">
+                                <h3>Guru Sains</h3>
+                                <p>Tenaga pendidik</p>
+                            </div>
+                            <div class="feature">
+                              <img src="03.jpg" alt="" width="160" height="150">
+                                <h3>Guru Sosial</h3>
+                                <p>Tenaga pendidik</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kesiswaan">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Pengembangan siswa</div>
+                    <h2>Kesiswaan dan Kegiatan</h2>
+                    <p>Beragam kegiatan untuk mengembangkan minat, bakat, dan kepemimpinan.</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <img src="21.jpg" alt="" width="160" height="150">
+                        <h3>Ekstrakurikuler Olahraga</h3>
+                        <p>Futsal, basket, voli, dan kegiatan kebugaran.</p>
+                    </div>
+                    <div class="feature">
+                        <img src="22.jpg" alt="" width="160" height="150">
+                        <h3>Seni dan Kreativitas</h3>
+                        <p>Seni musik, tari, teater, dan desain.</p>
+                    </div>
+                    <div class="feature">
+                        <img src="23.jpg" alt="" width="160" height="150">
+                        <h3>Pramuka</h3>
+                        <p>Melatih kemandirian, kerja sama, dan kedisiplinan.</p>
+                    </div>
+                    <div class="feature">
+                        <img src="24.jpg" alt="" width="160" height="150">
+                        <h3>OSIS</h3>
+                        <p>Organisasi siswa dan kegiatan kepemimpinan.</p>
+                    </div>
+                    <div class="feature">
+                        <img src="25.jpg" alt="" width="160" height="150">
+                        <h3>Kelompok Ilmiah</h3>
+                        <p>Eksperimen, penelitian, dan inovasi siswa.</p>
+                    </div>
+                    <div class="feature">
+                        <img src="26.jpg" alt="" width="160" height="150">
+                        <h3>Peduli Lingkungan</h3>
+                        <p>Kegiatan kebersihan dan penghijauan sekolah.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="soft-section" id="ppdb">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Penerimaan peserta didik baru</div>
+                    <h2>PPDB Online</h2>
+                    <p>Ikuti alur pendaftaran dan lengkapi formulir berikut.</p>
+                </div>
+                <div class="split">
+                    <div class="panel">
+                        <h3>Alur Pendaftaran</h3>
+                        <div class="steps">
+                            <div class="step"><b>1</b>Isi formulir</div>
+                            <div class="step"><b>2</b>Verifikasi data</div>
+                            <div class="step"><b>3</b>Pengumuman</div>
+                        </div>
+                        <h3>Persyaratan</h3>
+                        <ul class="muted" style="padding-left:20px;margin-top:8px">
+                            <li>Fotokopi ijazah atau surat keterangan lulus.</li>
+                            <li>Kartu keluarga.</li>
+                            <li>Akta kelahiran.</li>
+                            <li>Pas foto terbaru.</li>
+                        </ul>
+                        <p class="muted" style="font-size:.85rem;margin-top:12px">Catatan: sesuaikan persyaratan dengan
+                            ketentuan PPDB resmi sekolah.</p>
+                    </div>
+                    <form class="panel" id="ppdbForm">
+                        <h3>Formulir Pendaftaran</h3>
+                        <div class="form-grid" style="margin-top:16px">
+                            <div class="field full"><label for="nama">Nama lengkap</label><input id="nama" name="nama"
+                                    required placeholder="Masukkan nama lengkap"></div>
+                            <div class="field"><label for="email">Email</label><input id="email" name="email"
+                                    type="email" required placeholder="nama@email.com"></div>
+                            <div class="field"><label for="telepon">Nomor HP</label><input id="telepon" name="telepon"
+                                    type="tel" required placeholder="08xxxxxxxxxx"></div>
+                            <div class="field full"><label for="asal">Asal sekolah</label><input id="asal" name="asal"
+                                    required placeholder="Nama sekolah asal"></div>
+                            <div class="field full"><button class="btn btn-primary" type="submit">Kirim
+                                    Pendaftaran</button></div>
+                        </div>
+                        <p id="ppdbNotice" class="notice" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="portal">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Area pengguna</div>
+                    <h2>Portal Akademik</h2>
+                    <p>Contoh tampilan fitur portal siswa setelah login.</p>
+                </div>
+                <div class="panel">
+                    <div class="portal-grid">
+                        <div class="portal-item">
+                            <div class="feature-icon">📅</div><strong>Jadwal Pelajaran</strong><span class="muted">Lihat
+                                jadwal kelas.</span>
+                        </div>
+                        <div class="portal-item">
+                            <div class="feature-icon">📊</div><strong>Nilai Rapor</strong><span class="muted">Pantau
+                                hasil belajar.</span>
+                        </div>
+                        <div class="portal-item">
+                            <div class="feature-icon">📝</div><strong>Absensi</strong><span class="muted">Lihat rekap
+                                kehadiran.</span>
+                        </div>
+                    </div>
+                    <div class="field" style="max-width:420px;margin-top:22px"><label for="userLogin">Simulasi login
+                            siswa</label><input id="userLogin" placeholder="Masukkan NIS"></div>
+                    <button class="btn btn-primary" id="loginBtn" type="button">Masuk Portal</button>
+                    <p id="loginNotice" class="notice" aria-live="polite"></p>
+                    <p class="muted" style="font-size:.82rem;margin-top:8px">Demo tampilan: login ini belum terhubung ke
+                        database atau sistem akun sungguhan.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>SMA Negeri Nusantara</h3>
+                    <p>Sekolah yang berkomitmen membentuk generasi cerdas, berkarakter, dan siap menghadapi masa depan.
+                    </p>
+                </div>
+                <div>
+                    <h3>Tautan Penting</h3><a href="#profil">Profil Sekolah</a><a href="#akademik">Akademik</a><a
+                        href="#ppdb">Pendaftaran PPDB</a>
+                </div>
+                <div>
+                    <h3>Alamat & Kontak</h3>
+                    <p>Jl. Pendidikan No. 10, Indonesia</p>
+                    <p>info@smanusantara.sch.id</p>
+                    <p>(021) 123-4567</p>
+                </div>
+            </div>
+            <div class="copyright">© 2026 SMA Negeri Nusantara. Seluruh hak cipta dilindungi.</div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('open'));
+        });
+
+        document.getElementById('ppdbForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('ppdbNotice').textContent =
+                'Formulir berhasil diperiksa di browser. Hubungkan ke backend/database agar data benar-benar tersimpan.';
+            this.reset();
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const nis = document.getElementById('userLogin').value.trim();
+            document.getElementById('loginNotice').textContent = nis
+                ? 'Contoh login untuk NIS ' + nis + '. Fitur autentikasi perlu dihubungkan ke backend.'
+                : 'Silakan masukkan NIS terlebih dahulu.';
+        });
+    </script>
+</body>
+
+</html>
